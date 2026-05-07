@@ -379,7 +379,8 @@ async function loadNews() {
       list.innerHTML = '<p class="loading">お知らせはまだありません。</p>';
       return;
     }
-    const latest = rows.slice().reverse().slice(0,5);
+    // 1行目は見出し行なのでスキップして最新5件
+    const latest = rows.slice(1).reverse().slice(0,5);
     updateTicker(latest.map(row => ({
       date: row.c[0]?.v || '',
       title: row.c[2]?.v || ''
@@ -414,7 +415,9 @@ async function loadDocs() {
       grid.innerHTML = '<p style="color:rgba(255,255,255,.6);">資料はまだありません。</p>';
       return;
     }
-    grid.innerHTML = rows.map(row => {
+    // 1行目は見出し行なのでスキップ
+    const dataRows = rows.slice(1);
+    grid.innerHTML = dataRows.map(row => {
       const name = row.c[0]?.v || '';
       const desc = row.c[1]?.v || '';
       const link = row.c[2]?.v || '#';
