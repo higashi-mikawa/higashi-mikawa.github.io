@@ -340,7 +340,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
 async function loadSchedule() {
   const body = document.getElementById('scheduleBody');
   try {
-    const res = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('大会日程')}`);
+    const res = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent('大会日程')}`);
     const json = JSON.parse((await res.text()).substring(47).slice(0,-2));
     const rows = json.table.rows;
     if(!rows||!rows.length){ body.innerHTML='<tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">日程はまだ登録されていません。</td></tr>'; return; }
@@ -389,7 +389,7 @@ function updateTicker(items) {
 async function loadNews() {
   const list = document.getElementById('newsList');
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('お知らせ')}`;
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent('お知らせ')}`;
     const res = await fetch(url);
     const text = await res.text();
     const json = JSON.parse(text.substring(47).slice(0,-2));
@@ -428,7 +428,7 @@ async function loadNews() {
 async function loadDocs() {
   const grid = document.getElementById('docsGrid');
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent('資料')}`;
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent('資料')}`;
     const res = await fetch(url);
     const text = await res.text();
     const json = JSON.parse(text.substring(47).slice(0,-2));
