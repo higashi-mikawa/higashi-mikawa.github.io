@@ -342,9 +342,9 @@ async function loadSchedule() {
   try {
     const res = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent('大会日程')}`);
     const json = JSON.parse((await res.text()).substring(47).slice(0,-2));
-    const rows = json.table.rows;
-    if(!rows||!rows.length){ body.innerHTML='<tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">日程はまだ登録されていません。</td></tr>'; return; }
-    body.innerHTML = rows.slice(1).map(r => {
+    const rows = json.table.rows || [];
+    if(!rows.length){ body.innerHTML='<tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">日程はまだ登録されていません。</td></tr>'; return; }
+    body.innerHTML = rows.map(r => {
       const date = r.c[0]?.v||'';
       const name = r.c[1]?.v||'';
       const venue = r.c[2]?.v||'';
@@ -355,7 +355,7 @@ async function loadSchedule() {
       return `<tr><td style="font-weight:700;color:var(--navy);white-space:nowrap;">${date}</td><td><div class="sch-name">${name}</div></td><td>${venue}</td><td>${dlCell}</td><td>${resultCell}</td></tr>`;
     }).join('');
   } catch(e) {
-    body.innerHTML='<tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">読み込みに失敗しました。</td></tr>';
+    body.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">読み込みに失敗しました。(${e.message})</td></tr>`;
   }
 }
 
