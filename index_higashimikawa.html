@@ -346,6 +346,7 @@ async function loadSchedule() {
     const json = JSON.parse((await res.text()).substring(47).slice(0,-2));
     const rows = json.table.rows || [];
     if(!rows.length){ body.innerHTML='<tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">日程はまだ登録されていません。</td></tr>'; return; }
+    console.log('Schedule rows:', rows.length, rows[0]);
     body.innerHTML = rows.map(r => {
       const date = r.c[0]?.v||'';
       const name = r.c[1]?.v||'';
@@ -400,7 +401,7 @@ async function loadNews() {
       return;
     }
     // 1行目は見出し行なのでスキップして最新5件
-    const latest = rows.slice(1).reverse().slice(0,5);
+    const latest = rows.slice().reverse().slice(0,5);
     updateTicker(latest.map(row => ({
       date: row.c[0]?.v || '',
       title: row.c[2]?.v || ''
@@ -439,7 +440,7 @@ async function loadDocs() {
       return;
     }
     // 1行目は見出し行なのでスキップ
-    const dataRows = rows.slice(1);
+    const dataRows = rows;
     grid.innerHTML = dataRows.map(row => {
       const name = row.c[0]?.v || '';
       const desc = row.c[1]?.v || '';
