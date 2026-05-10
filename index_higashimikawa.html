@@ -337,6 +337,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
 </footer>
 
 <script>
+const SHEET_ID = '1KxUiJBHn3x6OJ-ozVGFPlq_2K0Z74havuOTy4fRBfkM';
+
 async function loadSchedule() {
   const body = document.getElementById('scheduleBody');
   try {
@@ -366,7 +368,6 @@ function toggleMenu() {
   btn.classList.toggle('open');
 }
 
-const SHEET_ID = '1KxUiJBHn3x6OJ-ozVGFPlq_2K0Z74havuOTy4fRBfkM';
 const TAG_COLORS = {
   '大会':'t-tai','お知らせ':'t-info',
   '結果':'t-res','写真':'t-res','活動報告':'t-res',
