@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://higashi-mikawa.github.io/sitemap.xml
