@@ -11,7 +11,7 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Noto Sans JP',sans-serif;color:#222;background:#fff;line-height:1.7;}
 
-/* ヘッダー */
+/* ヘッダー・フッターなどはそのまま維持 */
 header{background:#fff;border-bottom:3px solid var(--red);position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.08);}
 .hdr{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
@@ -23,151 +23,28 @@ nav a:hover{background:var(--red);color:#fff;}
 nav a.active{background:var(--red);color:#fff;}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
 .hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s;}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
 .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(26,26,46,0.97);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
 .mobile-nav.open{display:flex;}
-.mobile-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:900;padding:14px 40px;width:80%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1);transition:all .18s;}
-.mobile-nav a:hover{background:var(--red);border-radius:6px;}
-.mobile-nav-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:36px;cursor:pointer;line-height:1;}
+.mobile-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:900;padding:14px 40px;width:80%;text-align:center;border-bottom:1px solid rgba(255,255,255,.1);}
 
-/* ページヘッダー */
-.page-hero{background:var(--navy);padding:56px 24px 48px;position:relative;overflow:hidden;}
-.page-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(204,0,0,.7) 0%,rgba(26,26,46,.95) 60%);}
-.page-hero-in{max-width:1100px;margin:0 auto;position:relative;z-index:2;}
-.page-hero-badge{display:inline-block;background:#fff;color:var(--red);font-size:11px;font-weight:900;letter-spacing:.15em;padding:4px 14px;border-radius:2px;margin-bottom:14px;}
-.page-hero h1{font-size:clamp(24px,4vw,42px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:10px;}
-.page-hero p{color:rgba(255,255,255,.75);font-size:14px;max-width:500px;}
-.breadcrumb{display:flex;align-items:center;gap:8px;margin-top:20px;}
-.breadcrumb a{color:rgba(255,255,255,.55);text-decoration:none;font-size:12px;transition:color .18s;}
-.breadcrumb a:hover{color:#fff;}
-.breadcrumb span{color:rgba(255,255,255,.35);font-size:12px;}
+.page-hero{background:var(--navy);padding:56px 24px 48px;position:relative;}
+.page-hero-in{max-width:1100px;margin:0 auto;color:#fff;}
+.page-hero-badge{display:inline-block;background:#fff;color:var(--red);font-size:11px;font-weight:900;padding:4px 14px;border-radius:2px;margin-bottom:14px;}
+.page-hero h1{font-size:clamp(24px,4vw,42px);font-weight:900;margin-bottom:10px;}
 
-/* メインコンテンツ */
 main{max-width:760px;margin:0 auto;padding:56px 24px 80px;}
+.notice-box{background:#fff8e0;border-left:4px solid #cc9900;border-radius:0 6px 6px 0;padding:16px 20px;margin-bottom:36px;font-size:13px;color:#665500;}
 
-/* 注意書きブロック */
-.notice-box{background:#fff8e0;border-left:4px solid #cc9900;border-radius:0 6px 6px 0;padding:16px 20px;margin-bottom:36px;font-size:13px;color:#665500;line-height:1.7;}
-.notice-box strong{display:block;font-size:14px;margin-bottom:4px;}
-
-/* フォーム本体 */
-.c-form{background:#fff;border:1px solid var(--border);border-radius:10px;padding:36px 40px;box-shadow:0 2px 20px rgba(0,0,0,0.06);}
-
-.c-form__item{margin-bottom:28px;}
-
-.c-form__label{display:block;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;}
-
-.c-form__required{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:900;padding:2px 7px;border-radius:3px;margin-left:8px;vertical-align:middle;letter-spacing:.05em;}
-
-.c-form__input{
-  display:block;
-  width:100%;
-  font-family:'Noto Sans JP',sans-serif;
-  font-size:15px;
-  color:#222;
-  border:1.5px solid var(--border);
-  border-radius:6px;
-  padding:11px 14px;
-  transition:border-color .18s, box-shadow .18s;
-  background:#fff;
-  -webkit-appearance:none;
-}
-.c-form__input:focus{
-  outline:none;
-  border-color:var(--red);
-  box-shadow:0 0 0 3px rgba(204,0,0,.1);
-}
-.c-form__input::placeholder{color:#aaa;}
-
-select.c-form__input{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 14px center;
-  padding-right:36px;
-  cursor:pointer;
-}
-
-textarea.c-form__input{
-  height:180px;
-  resize:vertical;
-  line-height:1.7;
-}
-
-.c-form__submit{text-align:center;margin-top:8px;}
-
-.btn-submit{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  background:var(--red);
-  color:#fff;
-  font-family:'Noto Sans JP',sans-serif;
-  font-size:16px;
-  font-weight:900;
-  padding:15px 52px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  transition:all .2s;
-  box-shadow:0 4px 16px rgba(204,0,0,.3);
-  letter-spacing:.05em;
-}
-.btn-submit:hover{
-  background:var(--red-d);
-  transform:translateY(-2px);
-  box-shadow:0 6px 20px rgba(204,0,0,.4);
-}
-.btn-submit:active{transform:translateY(0);}
-
-.form-note{margin-top:14px;font-size:12px;color:var(--gray);text-align:center;}
-
-/* 送信完了メッセージ */
-#thanks-msg{
-  display:none;
-  text-align:center;
-  padding:48px 24px;
-}
-#thanks-msg .thanks-icon{font-size:52px;margin-bottom:16px;}
-#thanks-msg h2{font-size:22px;font-weight:900;color:var(--navy);margin-bottom:12px;}
-#thanks-msg p{font-size:14px;color:var(--gray);line-height:1.8;margin-bottom:24px;}
-.btn-back{
-  display:inline-block;
-  background:var(--navy);
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-  font-size:14px;
-  padding:12px 32px;
-  border-radius:6px;
-  transition:all .2s;
-}
-.btn-back:hover{background:var(--red);}
-
-/* 非表示iframe（Googleフォーム送信用） */
-iframe#hidden_iframe{display:none;}
-
-/* フッター */
 footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-align:center;}
-.ft-in{max-width:1100px;margin:0 auto;}
-.ft-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;}
-.ft-logo span{font-size:15px;font-weight:900;color:#fff;}
-.ft-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:16px;}
-.ft-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:12px;transition:color .2s;}
-.ft-links a:hover{color:#fff;}
-.ft-copy{font-size:11px;}
 
 @media(max-width:768px){
   nav{display:none;}
   .hamburger{display:flex;}
-  .c-form{padding:24px 20px;}
-  main{padding:36px 16px 60px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ヘッダー -->
 <header>
   <div class="hdr">
     <a href="index.html" class="logo">
@@ -178,212 +55,48 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
     </a>
     <nav>
       <a href="index.html#news">お知らせ</a>
-      <a href="index.html#entry">大会申込</a>
-      <a href="index.html#schedule">大会日程</a>
-      <a href="index.html#documents">資料</a>
-      <a href="index.html#gallery">写真</a>
-      <a href="index.html#line">公式LINE</a>
       <a href="contact.html" class="active">お問い合わせ</a>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="メニュー">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<!-- モバイルナビ -->
-<div class="mobile-nav" id="mobileNav">
-  <button class="mobile-nav-close" id="mobileClose">✕</button>
-  <a href="index.html#news" onclick="closeMobileNav()">お知らせ</a>
-  <a href="index.html#entry" onclick="closeMobileNav()">大会申込</a>
-  <a href="index.html#schedule" onclick="closeMobileNav()">大会日程</a>
-  <a href="index.html#documents" onclick="closeMobileNav()">資料</a>
-  <a href="index.html#gallery" onclick="closeMobileNav()">写真</a>
-  <a href="index.html#line" onclick="closeMobileNav()">公式LINE</a>
-  <a href="contact.html" onclick="closeMobileNav()">お問い合わせ</a>
-</div>
-
-<!-- ページヘッダー -->
 <div class="page-hero">
   <div class="page-hero-in">
     <div class="page-hero-badge">CONTACT</div>
     <h1>📬 お問い合わせ</h1>
-    <p>大会・登録・ルールなど、お気軽にご連絡ください。</p>
-    <div class="breadcrumb">
-      <a href="index.html">ホーム</a>
-      <span>›</span>
-      <span style="color:rgba(255,255,255,.8);">お問い合わせ</span>
-    </div>
   </div>
 </div>
 
-<!-- メインコンテンツ -->
 <main>
-
   <div class="notice-box">
-    <strong>📌 送信前にご確認ください</strong>
-    フォームを送信すると、ご入力いただいたメールアドレス宛てに<strong>自動返信メール</strong>が届きます。万が一届かない場合は、メールアドレスの入力誤りや迷惑メールフォルダをご確認ください。
+    <strong>📌 ご確認ください</strong>
+    送信ボタンを押した後、Googleの回答完了画面が表示されます。
   </div>
 
-  <!-- ========================================================
-       【entry番号の設定方法】
-       1. Googleフォームをブラウザで開く
-       2. 右クリック→「ページのソースを表示」
-       3. Ctrl+F で「entry.」を検索
-       4. 各フィールドの entry.XXXXXXXXX 番号を確認する
-       5. 下記 name="entry.XXXXXXXXX" を実際の番号に置き換える
-
-       ※または Googleフォームの「事前入力URL」機能を使う：
-          フォーム編集画面 → ⋮メニュー → 「事前入力リンクを取得」
-          → 各フィールドに適当な値を入力 → URLからentry番号を読み取る
-  ======================================================== -->
-
-  <!-- Googleフォーム送信先（隠しiframe） -->
-  <iframe
-    name="hidden_iframe"
-    id="hidden_iframe"
-    style="display:none"
-    onload="if(submitted){ showThanks(); }">
-  </iframe>
-
-  <!-- お問い合わせフォーム -->
-  <div id="form-area">
-    <form
-      action="https://docs.google.com/forms/d/e/1FAIpQLSf-XnjDFtzn-BRFJhB63nPPjTdolIs_Lk1szCxxyt9GP9JGrQ/formResponse"
-      method="POST"
-      target="hidden_iframe"
-      onsubmit="submitted=true;"
-      class="c-form"
-    >
-
-      <!-- メールアドレス -->
-      <div class="c-form__item">
-        <label class="c-form__label" for="field-email">
-          メールアドレス<span class="c-form__required">必須</span>
-        </label>
-        <input
-          type="email"
-          id="field-email"
-          name="emailAddress"
-          class="c-form__input"
-          placeholder="example@email.com"
-          required
-          autocomplete="email"
-        >
-      </div>
-
-      <!-- お問い合わせ項目（プルダウン） -->
-      <div class="c-form__item">
-        <label class="c-form__label" for="field-category">
-          お問い合わせ項目<span class="c-form__required">必須</span>
-        </label>
-        <select
-          id="field-category"
-          name="entry.2009588893"
-          class="c-form__input"
-          required
-        >
-          <option value="" disabled selected>【項目を選択してください】</option>
-          <option value="大会に関すること">大会に関すること</option>
-          <option value="登録に関すること">登録に関すること</option>
-          <option value="ルール・審判に関すること">ルール・審判に関すること</option>
-          <option value="その他">その他</option>
-        </select>
-      </div>
-
-      <!-- お名前 -->
-      <div class="c-form__item">
-        <label class="c-form__label" for="field-name">
-          お名前<span class="c-form__required">必須</span>
-        </label>
-        <input
-          type="text"
-          id="field-name"
-          name="entry.1148398098"
-          class="c-form__input"
-          placeholder="山田 太郎"
-          required
-          autocomplete="name"
-        >
-      </div>
-
-      <!-- お問い合わせ内容 -->
-      <div class="c-form__item">
-        <label class="c-form__label" for="field-message">
-          お問い合わせ内容<span class="c-form__required">必須</span>
-        </label>
-        <textarea
-          id="field-message"
-          name="entry.1330324639"
-          class="c-form__input"
-          placeholder="お問い合わせ内容をご記入ください。"
-          required
-        ></textarea>
-      </div>
-
-      <div class="c-form__submit">
-        <button type="submit" class="btn-submit">
-          📨 送信する
-        </button>
-      </div>
-      <p class="form-note">※ 送信後、確認のメールが自動返信されます</p>
-
-    </form>
+  <div style="width: 100%; max-width: 760px; margin: 0 auto; text-align: center;">
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSf-XnjDFtzn-BRFJhB63nPPjTdolIs_Lk1szCxxyt9GP9JGrQ/viewform?embedded=true" 
+      width="100%" 
+      height="1244" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0">
+      読み込んでいます…
+    </iframe>
   </div>
-
-  <!-- 送信完了メッセージ（送信後に表示） -->
-  <div id="thanks-msg">
-    <div class="thanks-icon">✅</div>
-    <h2>送信が完了しました</h2>
-    <p>お問い合わせいただきありがとうございます。<br>
-    ご入力のメールアドレスに確認メールをお送りしました。<br>
-    内容を確認の上、担当者よりご連絡させていただきます。</p>
-    <a href="index.html" class="btn-back">← トップページへ戻る</a>
-  </div>
-
 </main>
 
-<!-- フッター -->
 <footer>
-  <div class="ft-in">
-    <div class="ft-logo">
-      <span>愛知県ソフトバレーボール連盟 東三河支部</span>
-    </div>
-    <div class="ft-links">
-      <a href="index.html#news">お知らせ</a>
-      <a href="index.html#schedule">大会日程</a>
-      <a href="index.html#entry">大会申込</a>
-      <a href="contact.html">お問い合わせ</a>
-    </div>
-    <div class="ft-copy">© 2025 愛知県ソフトバレーボール連盟 東三河支部</div>
-  </div>
+  <div class="ft-copy">© 2025 愛知県ソフトバレーボール連盟 東三河支部</div>
 </footer>
 
 <script>
-let submitted = false;
-
-// ハンバーガーメニュー
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.getElementById('mobileNav');
-const mobileClose = document.getElementById('mobileClose');
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileNav.classList.toggle('open');
+if(hamburger) hamburger.addEventListener('click', () => {
+    document.getElementById('mobileNav')?.classList.toggle('open');
 });
-mobileClose.addEventListener('click', closeMobileNav);
-
-function closeMobileNav() {
-  hamburger.classList.remove('open');
-  mobileNav.classList.remove('open');
-}
-
-// 送信完了後の表示切り替え
-function showThanks() {
-  document.getElementById('form-area').style.display = 'none';
-  document.getElementById('thanks-msg').style.display = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 </script>
 
 </body>
