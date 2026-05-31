@@ -48,7 +48,7 @@ nav a:hover{background:var(--red);color:#fff;}
 .btn-r:hover{background:var(--red-d);transform:translateY(-2px);}
 .btn-o{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);font-weight:700;font-size:14px;padding:11px 24px;border-radius:4px;text-decoration:none;transition:all .2s;}
 .btn-o:hover{background:rgba(255,255,255,.12);}
-section{padding:68px 24px;}
+section{padding:36px 24px;}
 .sec{max-width:1100px;margin:0 auto;}
 .sec-lbl{font-size:11px;font-weight:900;letter-spacing:.2em;color:var(--red);text-transform:uppercase;margin-bottom:6px;}
 .sec-ttl{font-size:clamp(20px,3vw,30px);font-weight:900;color:var(--navy);margin-bottom:36px;padding-bottom:12px;border-bottom:3px solid var(--red);}
@@ -140,7 +140,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
   .hamburger{display:flex;}
   .line-box{padding:24px 20px;gap:20px;grid-template-columns:1fr;}
   .line-left{flex-wrap:wrap;}
-  section{padding:48px 18px;}
+  section{padding:36px 18px;}
   .sch-tbl{font-size:12px;}
   .sch-tbl td{padding:10px 8px;}
 }
@@ -206,7 +206,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
       <a href="#entry" class="btn-r">📝 大会に申し込む</a>
     </div>
     <div style="margin-top:20px;">
-      <p style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:6px;">連盟全体の公式情報は、愛知県ソフトバレーボール連盟の公式サイトをご確認ください。</p>
+      <p style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:6px;">連盟全体の公式情報は、愛知県ソフトバレーボール連盟の公式サイトもあわせてご確認ください。</p>
       <a href="https://aichisvf.la.coocan.jp/" target="_blank" style="color:rgba(255,255,255,.7);font-size:13px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;transition:all .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.7)'">🌐 愛知県ソフトバレーボール連盟 公式サイトはこちら</a>
     </div>
   </div>
@@ -300,16 +300,20 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
   <div class="sec">
     <div class="sec-lbl">PHOTO GALLERY</div>
     <h2 class="sec-ttl">活動写真・活動報告</h2>
-    <div style="border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);background:#fff;">
-      <iframe
-        src="https://drive.google.com/embeddedfolderview?id=18ukQ_y5X2NW-FHmPJaYFnsY0zkkLBqqz#grid"
-        style="width:100%;height:500px;border:none;"
-        allowfullscreen>
-      </iframe>
+    <div class="gal-grid" id="galGrid">
+      <p class="loading" style="grid-column:1/-1;text-align:center;">⏳ 写真を読み込み中...</p>
     </div>
-
+    <div style="text-align:center;margin-top:8px;">
+      <p class="gal-note" id="galNote"></p>
+    </div>
   </div>
 </section>
+
+<!-- ライトボックス -->
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:1000;align-items:center;justify-content:center;cursor:pointer;" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:90vh;border-radius:6px;box-shadow:0 8px 40px rgba(0,0,0,0.5);">
+  <button onclick="event.stopPropagation();closeLightbox()" style="position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:36px;cursor:pointer;line-height:1;">✕</button>
+</div>
 
 <section id="line">
   <div class="sec">
@@ -552,6 +556,48 @@ loadNews();
 loadDocs();
 loadFaq();
 loadSchedule();
+loadGallery();
+
+const GALLERY_FOLDER_ID = '18ukQ_y5X2NW-FHmPJaYFnsY0zkkLBqqz';
+const GALLERY_API_KEY   = 'AIzaSyDQXkwIFTf12nKrQbtaJi3R8BbYbXMS-Z4';
+
+async function loadGallery() {
+  const grid = document.getElementById('galGrid');
+  const note = document.getElementById('galNote');
+  try {
+    const url = `https://www.googleapis.com/drive/v3/files?q='${GALLERY_FOLDER_ID}'+in+parents+and+mimeType+contains+'image/'+and+trashed=false&fields=files(id,name)&orderBy=createdTime+desc&pageSize=24&key=${GALLERY_API_KEY}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    const files = data.files || [];
+    if (files.length === 0) {
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#888;">現在、写真はありません。</p>';
+      return;
+    }
+    grid.innerHTML = files.map(f => `
+      <div class="gal-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=${f.id}&sz=w1200')" style="cursor:pointer;">
+        <img src="https://drive.google.com/thumbnail?id=${f.id}&sz=w400" alt="${f.name}" loading="lazy">
+      </div>
+    `).join('');
+    if (files.length >= 24) {
+      note.innerHTML = `<a href="https://drive.google.com/drive/folders/${GALLERY_FOLDER_ID}" target="_blank" class="gal-btn">📷 すべての写真を見る</a>`;
+    }
+  } catch(e) {
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#888;">写真の読み込みに失敗しました。</p>';
+  }
+}
+
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = src;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.getElementById('lightbox-img').src = '';
+  document.body.style.overflow = '';
+}
 </script>
 </body>
 </html>
