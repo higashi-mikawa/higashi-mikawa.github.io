@@ -159,10 +159,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
     </a>
     <nav>
       <a href="#news">お知らせ</a>
-      <a href="#entry">大会申込</a>
       <a href="#schedule">大会日程</a>
-      <a href="#faq">よくある質問</a>
+      <a href="#entry">大会申込</a>
       <a href="#documents">資料</a>
+      <a href="#faq">よくある質問</a>
       <a href="#gallery">写真</a>
       <a href="#line">公式LINE</a>
       <a href="#contact">お問い合わせ</a>
@@ -177,10 +177,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-nav-close" onclick="toggleMenu()">✕</button>
   <a href="#news" onclick="toggleMenu()">お知らせ</a>
-  <a href="#entry" onclick="toggleMenu()">大会申込</a>
   <a href="#schedule" onclick="toggleMenu()">大会日程</a>
-  <a href="#faq" onclick="toggleMenu()">よくある質問</a>
+  <a href="#entry" onclick="toggleMenu()">大会申込</a>
   <a href="#documents" onclick="toggleMenu()">資料</a>
+  <a href="#faq" onclick="toggleMenu()">よくある質問</a>
   <a href="#gallery" onclick="toggleMenu()">写真</a>
   <a href="#line" onclick="toggleMenu()">公式LINE</a>
   <a href="#contact" onclick="toggleMenu()">お問い合わせ</a>
@@ -202,8 +202,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
     <p style="font-size:18px;font-weight:900;color:#fff;margin-bottom:12px;line-height:1.5;">いくつになっても、コートが最高の居場所</p>
     <p class="hero-desc">初心者からベテランまで、世代を超えて楽しめるソフトバレーボール。<br>私たちは豊橋・豊川・蒲郡・新城・田原を拠点に、スポーツを通じた活気あるコミュニティづくりを支援しています。<br>このページは東三河支部が独自に作成したサポートサイトです。</p>
     <div class="hero-btns">
-      <a href="#entry" class="btn-r">📝 大会に申し込む</a>
       <a href="#schedule" class="btn-o">🏆 大会日程を見る</a>
+      <a href="#entry" class="btn-r">📝 大会に申し込む</a>
     </div>
     <div style="margin-top:20px;">
       <p style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:6px;">連盟全体の公式情報は、愛知県ソフトバレーボール連盟の公式サイトもあわせてご確認ください。</p>
@@ -222,34 +222,31 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
   </div>
 </section>
 
-<section id="entry" style="background:#fff;">
+<section id="schedule">
   <div class="sec">
-    <div class="sec-lbl">ENTRY</div>
-    <h2 class="sec-ttl">大会参加申込</h2>
-    <p style="font-size:15px;color:#444;margin-bottom:16px;line-height:1.8;">
-      Googleフォームでの申込となります。<br>
-      以下の情報をご準備の上、お申し込みください。
-    </p>
-    <div style="background:var(--light);border-left:4px solid var(--red);padding:16px 20px;margin-bottom:28px;border-radius:0 6px 6px 0;">
-      <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;">📋 申込に必要な情報</p>
-      <ul style="font-size:13px;color:#444;line-height:2;list-style:none;padding:0;">
-        <li>✅ メールアドレス（確認メールが届きます）</li>
-        <li>✅ 参加大会日・希望ランク（A・B・C）</li>
-        <li>✅ チーム名・申込責任者名・携帯電話番号</li>
-        <li>✅ 選手全員の氏名・年齢・性別・登録状況</li>
-        <li>✅ コート内4人の最小合計年齢</li>
-      </ul>
-    </div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9jmDJy366MIpQ52MnOU0Kt9hc4hD6dwerU-X-2i5T3dtI-g/viewform" target="_blank"
-      style="display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;text-decoration:none;font-weight:900;font-size:16px;padding:16px 40px;border-radius:6px;transition:all .2s;box-shadow:0 4px 16px rgba(204,0,0,0.3);"
-      onmouseover="this.style.background='#990000'" onmouseout="this.style.background='#cc0000'">
-      📝 申込フォームへ進む
-    </a>
-    <p style="margin-top:14px;font-size:12px;color:#888;">※ 申込完了後、自動返信メールが届きます。届かない場合は迷惑メールフォルダをご確認ください。</p>
+    <div class="sec-lbl">SCHEDULE</div>
+    <h2 class="sec-ttl">2026年度 大会・行事日程</h2>
+    <table class="sch-tbl" id="scheduleTable">
+      <thead>
+        <tr>
+          <th>開催日</th>
+          <th>種目・行事</th>
+          <th>会場</th>
+          <th>申込締切日</th>
+          <th>結果</th>
+        </tr>
+      </thead>
+      <tbody id="scheduleBody">
+        <tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">⏳ 読み込み中...</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:13px;color:var(--navy);font-weight:700;">🕗 開場時間　豊橋市【8時30分～】　豊川市・田原市【8時50分～】</p>
+    <p style="margin-top:6px;font-size:12px;color:var(--gray);">※ 日程・会場は変更になる場合があります。公式LINEでも最新情報をお知らせします。</p>
+    <div id="pastSeasons" style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;"></div>
   </div>
 </section>
 
-<section id="schedule">
+<section id="entry" style="background:#fff;">
   <div class="sec">
     <div class="sec-lbl">SCHEDULE</div>
     <h2 class="sec-ttl">2026年度 大会・行事日程</h2>
@@ -362,10 +359,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
     </div>
     <div class="ft-links">
       <a href="#news">お知らせ</a>
-      <a href="#entry">大会申込</a>
       <a href="#schedule">大会日程</a>
-      <a href="#faq">よくある質問</a>
+      <a href="#entry">大会申込</a>
       <a href="#documents">資料</a>
+      <a href="#faq">よくある質問</a>
       <a href="#gallery">写真</a>
       <a href="#line">公式LINE</a>
       <a href="#contact">お問い合わせ</a>
