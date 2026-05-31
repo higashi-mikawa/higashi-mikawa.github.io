@@ -33,7 +33,7 @@ nav a:hover{background:var(--red);color:#fff;}
 .ticker{background:var(--red);display:flex;overflow:hidden;}
 .tk-label{background:var(--red-d);padding:11px 18px;font-size:12px;font-weight:900;color:#fff;white-space:nowrap;letter-spacing:.1em;}
 .tk-wrap{flex:1;overflow:hidden;}
-.tk-inner{display:flex;gap:80px;padding:11px 20px;white-space:nowrap;font-size:13px;color:#fff;font-weight:500;animation:ticker 40s linear infinite;}
+.tk-inner{display:flex;gap:80px;padding:11px 20px;white-space:nowrap;font-size:13px;color:#fff;font-weight:500;animation:ticker 33.3s linear infinite;}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .hero{position:relative;overflow:hidden;background:var(--navy);min-height:480px;display:flex;align-items:center;}
 .hero-img{display:none;}
@@ -108,9 +108,9 @@ section{padding:68px 24px;}
 #contact{background:var(--red);}
 #contact .sec-ttl{color:#fff;border-color:rgba(255,255,255,.4);}
 #contact .sec-lbl{color:rgba(255,255,255,.7);}
-.con-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:12px 24px 24px;text-decoration:none;display:flex;align-items:center;gap:16px;transition:all .2s;max-width:500px;}
+.con-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:24px;text-decoration:none;display:block;transition:all .2s;max-width:500px;}
 .con-card:hover{background:rgba(255,255,255,.2);}
-.con-icon{font-size:26px;}
+.con-icon{font-size:26px;margin-bottom:8px;}
 .con-lbl{font-size:11px;font-weight:900;color:rgba(255,255,255,.7);letter-spacing:.1em;margin-bottom:4px;}
 .con-val{font-size:17px;font-weight:900;color:#fff;}
 .con-note{margin-top:16px;color:rgba(255,255,255,.7);font-size:12px;}
@@ -184,7 +184,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
 <div class="hero">
   <div class="hero-ov"></div>
   <div class="hero-in">
-    <div class="hero-badge">HIGASHI-MIKAWA BRANCH</div>
     <h1><em>愛知県ソフトバレーボール連盟</em>東三河支部</h1>
     <p style="font-size:18px;font-weight:900;color:#fff;margin-bottom:12px;line-height:1.5;">いくつになっても、コートが最高の居場所</p>
     <p class="hero-desc">初心者からベテランまで、世代を超えて楽しめるソフトバレーボール。<br>私たちは豊橋・豊川・蒲郡・新城・田原を拠点に、スポーツを通じた活気あるコミュニティづくりを支援しています。<br>このページは東三河支部が独自に作成したサポートサイトです。</p>
@@ -322,10 +321,8 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
     <h2 class="sec-ttl">お問い合わせ</h2>
     <a class="con-card" href="contact.html">
       <div class="con-icon">📬</div>
-      <div>
-        <div class="con-lbl">お問い合わせフォーム</div>
-        <div class="con-val">フォームへ進む →</div>
-      </div>
+      <div class="con-lbl">お問い合わせフォーム</div>
+      <div class="con-val">フォームへ進む →</div>
     </a>
     
   </div>
