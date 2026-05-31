@@ -84,6 +84,18 @@ section{padding:68px 24px;}
 .doc-name{color:#fff;font-weight:700;font-size:13px;line-height:1.4;}
 .doc-meta{color:rgba(255,255,255,.45);font-size:11px;margin-top:3px;}
 .doc-date{color:rgba(255,255,255,.35);font-size:11px;margin-top:2px;}
+#faq{background:#fff;}
+.faq-list{max-width:720px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-item:first-child{border-top:1px solid var(--border);}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 4px;cursor:pointer;font-size:15px;font-weight:700;color:var(--navy);line-height:1.5;transition:color .18s;}
+.faq-q:hover{color:var(--red);}
+.faq-q-text::before{content:'Q. ';color:var(--red);font-weight:900;}
+.faq-icon{flex-shrink:0;width:28px;height:28px;border-radius:50%;border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--navy);transition:all .3s;line-height:1;}
+.faq-item.open .faq-icon{background:var(--red);border-color:var(--red);color:#fff;transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-a-inner{padding:4px 4px 20px;font-size:14px;color:#444;line-height:1.8;border-left:3px solid var(--red);padding-left:16px;}
+.faq-a-inner::before{content:'A. ';color:var(--red);font-weight:900;}
 #gallery{background:var(--light);}
 .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
 .gal-item{border-radius:6px;overflow:hidden;aspect-ratio:4/3;}
@@ -150,6 +162,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
       <a href="#entry">大会申込</a>
       <a href="#schedule">大会日程</a>
       <a href="#documents">資料</a>
+      <a href="#faq">よくある質問</a>
       <a href="#gallery">写真</a>
       <a href="#line">公式LINE</a>
       <a href="#contact">お問い合わせ</a>
@@ -167,6 +180,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
   <a href="#entry" onclick="toggleMenu()">大会申込</a>
   <a href="#schedule" onclick="toggleMenu()">大会日程</a>
   <a href="#documents" onclick="toggleMenu()">資料</a>
+  <a href="#faq" onclick="toggleMenu()">よくある質問</a>
   <a href="#gallery" onclick="toggleMenu()">写真</a>
   <a href="#line" onclick="toggleMenu()">公式LINE</a>
   <a href="#contact" onclick="toggleMenu()">お問い合わせ</a>
@@ -272,6 +286,16 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
   </div>
 </section>
 
+<section id="faq">
+  <div class="sec">
+    <div class="sec-lbl">FAQ</div>
+    <h2 class="sec-ttl">よくある質問</h2>
+    <div class="faq-list" id="faqList">
+      <p class="loading">⏳ 読み込んでいます...</p>
+    </div>
+  </div>
+</section>
+
 <section id="gallery">
   <div class="sec">
     <div class="sec-lbl">PHOTO GALLERY</div>
@@ -341,6 +365,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:36px 24px;text-
       <a href="#entry">大会申込</a>
       <a href="#schedule">大会日程</a>
       <a href="#documents">資料</a>
+      <a href="#faq">よくある質問</a>
       <a href="#gallery">写真</a>
       <a href="#line">公式LINE</a>
       <a href="#contact">お問い合わせ</a>
@@ -476,8 +501,56 @@ async function loadDocs() {
   }
 }
 
+async function loadFaq() {
+  const list = document.getElementById('faqList');
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent('よくある質問')}`;
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.substring(47).slice(0,-2));
+    const rows = json.table.rows;
+    if (!rows || rows.length === 0) {
+      list.innerHTML = '<p style="color:#888;text-align:center;">現在、よくある質問はありません。</p>';
+      return;
+    }
+    list.innerHTML = rows.map((row, i) => {
+      const q = row.c[1]?.v || '';
+      const a = row.c[2]?.v || '';
+      return `<div class="faq-item" id="faq-${i}">
+        <div class="faq-q" onclick="toggleFaq(${i})">
+          <span class="faq-q-text">${q}</span>
+          <span class="faq-icon">＋</span>
+        </div>
+        <div class="faq-a" id="faq-a-${i}">
+          <div class="faq-a-inner">${a}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    list.innerHTML = '<p style="color:#888;text-align:center;">読み込みに失敗しました。</p>';
+  }
+}
+
+function toggleFaq(i) {
+  const item = document.getElementById(`faq-${i}`);
+  const ans  = document.getElementById(`faq-a-${i}`);
+  const isOpen = item.classList.contains('open');
+  // 他を全部閉じる
+  document.querySelectorAll('.faq-item.open').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-a').style.maxHeight = '0';
+    el.querySelector('.faq-icon').textContent = '＋';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    ans.style.maxHeight = ans.scrollHeight + 'px';
+    item.querySelector('.faq-icon').textContent = '＋';
+  }
+}
+
 loadNews();
 loadDocs();
+loadFaq();
 loadSchedule();
 </script>
 </body>
