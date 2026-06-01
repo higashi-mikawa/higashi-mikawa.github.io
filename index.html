@@ -552,14 +552,14 @@ function toggleFaq(i) {
   }
 }
 
+const GALLERY_FOLDER_ID = '18ukQ_y5X2NW-FHmPJaYFnsY0zkkLBqqz';
+const GALLERY_API_KEY   = 'AIzaSyDQXkwIFTf12nKrQbtaJi3R8BbYbXMS-Z4';
+
 loadNews();
 loadDocs();
 loadFaq();
 loadSchedule();
 loadGallery();
-
-const GALLERY_FOLDER_ID = '18ukQ_y5X2NW-FHmPJaYFnsY0zkkLBqqz';
-const GALLERY_API_KEY   = 'AIzaSyDQXkwIFTf12nKrQbtaJi3R8BbYbXMS-Z4';
 
 async function loadGallery() {
   const grid = document.getElementById('galGrid');
