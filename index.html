@@ -438,12 +438,25 @@ async function loadSchedule() {
       const deadline = r.c[3]?.v||'';
       const resultUrl = r.c[4]?.v||'';
       const dlCell = deadline ? `<span style="color:var(--red);font-weight:700;">${escapeHtml(deadline)}</span>` : '<span style="color:#999;">―</span>';
-      // 開催日の朝8時30分を過ぎたら結果リンクを表示
+      // 開催日の朝8時30分を過ぎたら「結果」表示。それより前にリンクが入っている場合は「詳細」として今すぐ表示する
       const now = new Date();
       const dateParts = String(date).replace(/\./g, '/');
       const eventDate = new Date(dateParts); eventDate.setHours(8,30,0,0);
-      const showResult = resultUrl && !isNaN(eventDate) && now >= eventDate;
-      const resultCell = showResult ? `<a href="${escapeHtml(resultUrl)}" target="_blank" style="display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;text-decoration:none;">結果</a>` : '<span style="color:#999;">―</span>';
+      const isPast = !isNaN(eventDate) && now >= eventDate;
+      // 結果用スプレッドシートのリンクは今まで通り開催日8:30まで非表示。
+      // それ以外の外部リンク(特設ページ等)は日付に関係なく「詳細」として今すぐ表示する。
+      const isSpreadsheetLink = resultUrl && resultUrl.indexOf('/spreadsheets/') !== -1;
+      let resultCell = '<span style="color:#999;">―</span>';
+      if (resultUrl) {
+        if (isSpreadsheetLink) {
+          if (isPast) {
+            resultCell = `<a href="${escapeHtml(resultUrl)}" target="_blank" style="display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;text-decoration:none;">結果</a>`;
+          }
+        } else {
+          const label = isPast ? '結果' : '詳細';
+          resultCell = `<a href="${escapeHtml(resultUrl)}" target="_blank" style="display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;text-decoration:none;">${label}</a>`;
+        }
+      }
       if (name && !isNaN(eventDate) && eventDate >= now) {
         jsonLdEvents.push({
           '@context': 'https://schema.org',
