@@ -5,28 +5,42 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>ページが見つかりません | 東三河支部</title>
 <link rel="icon" href="images/logo.jpg" type="image/jpeg">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--red:#cc0000;--navy:#1a1a2e;--gray:#666;}
+:root{--red:#a8121f;--navy:#12141f;--gold:#c9a24b;--gold-lt:#e3c37a;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans JP',sans-serif;color:#222;background:var(--navy);min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;}
-.wrap{max-width:480px;}
-.logo{width:72px;height:72px;border-radius:12px;margin-bottom:24px;}
-.code{font-size:15px;font-weight:900;letter-spacing:.2em;color:var(--red);margin-bottom:12px;}
-h1{font-size:24px;font-weight:900;color:#fff;margin-bottom:16px;}
-p{color:rgba(255,255,255,.75);font-size:14px;line-height:1.8;margin-bottom:32px;}
-a.btn{display:inline-block;background:var(--red);color:#fff;font-weight:900;font-size:14px;padding:12px 32px;border-radius:50px;text-decoration:none;transition:all .2s;}
+body{
+  font-family:'Noto Sans JP',sans-serif;color:#222;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:24px;position:relative;overflow:hidden;background:var(--navy);
+}
+.ov{position:absolute;inset:0;background:linear-gradient(120deg,rgba(204,0,0,.88) 0%,rgba(26,26,46,.92) 55%);}
+.wrap{position:relative;z-index:2;max-width:560px;display:flex;flex-direction:column;align-items:center;}
+.code{font:600 96px/1 'Barlow Condensed','Noto Sans JP',sans-serif;letter-spacing:.12em;color:var(--gold-lt);}
+.rule{width:56px;height:1px;background:rgba(201,162,75,.8);margin:26px 0 30px;}
+h1{font-size:32px;font-weight:700;letter-spacing:.06em;color:#fff;margin-bottom:20px;}
+p{color:#f0dcdd;font-size:15px;line-height:2.05;margin-bottom:40px;max-width:520px;}
+a.btn{display:inline-flex;align-items:center;height:58px;padding:0 40px;background:#fff;color:var(--red);font-size:15px;font-weight:700;letter-spacing:.08em;border-radius:2px;text-decoration:none;transition:transform .18s;}
 a.btn:hover{transform:translateY(-2px);}
 a.btn:focus-visible{outline:3px solid #fff;outline-offset:2px;}
+.copy{margin-top:44px;font:400 11px/1 'Barlow Condensed','Noto Sans JP',sans-serif;letter-spacing:.1em;color:rgba(255,255,255,.66);}
+@media(max-width:768px){
+  .code{font-size:68px;}
+  h1{font-size:24px;}
+}
 </style>
 </head>
 <body>
+  <div class="ov"></div>
   <div class="wrap">
-    <img class="logo" src="images/logo.jpg" alt="ASVF">
-    <div class="code">404 NOT FOUND</div>
+    <span class="code">404</span>
+    <span class="rule"></span>
     <h1>お探しのページが見つかりません</h1>
-    <p>URLが変更・削除されたか、入力に誤りがある可能性があります。<br>トップページから目的のページをお探しください。</p>
-    <a class="btn" href="/">🏠 トップページへ戻る</a>
+    <p>URLが変更・削除されたか、入力に誤りがある可能性があります。</p>
+    <a class="btn" href="/">トップページへ戻る</a>
+    <span class="copy">© 2026 愛知県ソフトバレーボール連盟 東三河支部. All Rights Reserved.</span>
   </div>
 </body>
 </html>
