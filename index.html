@@ -837,19 +837,17 @@ async function loadFaq() {
     list.innerHTML = rows.map((row, i) => {
       const q = escapeHtml(row.c[1]?.v || '');
       const a = escapeHtml(row.c[2]?.v || '').replace(/\n/g, '<br>');
-      return `<div class="faq-item${i === 0 ? ' open' : ''}" id="faq-${i}">
+      return `<div class="faq-item" id="faq-${i}">
         <div class="faq-q" onclick="toggleFaq(${i})">
           <span class="faq-q-text">${q}</span>
-          <span class="faq-icon">${i === 0 ? '−' : '＋'}</span>
+          <span class="faq-icon">＋</span>
         </div>
         <div class="faq-a" id="faq-a-${i}">
           <div class="faq-a-inner">${a}</div>
         </div>
       </div>`;
     }).join('');
-    // 1件目を開いた状態にする
-    const first = document.getElementById('faq-a-0');
-    if (first) first.style.maxHeight = first.scrollHeight + 'px';
+    // 最初はすべて閉じた状態にする（タップした質問だけ開く）
   } catch(e) {
     list.innerHTML = '<p style="color:#888;text-align:center;">読み込みに失敗しました。</p>';
   }
