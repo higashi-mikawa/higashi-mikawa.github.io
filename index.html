@@ -55,9 +55,9 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid 
 
 /* ===== 告知バー（動的ニューステッカー） ===== */
 .ticker{background:var(--navy);display:flex;align-items:stretch;overflow:hidden;}
-.tk-label{display:flex;align-items:center;background:rgba(255,255,255,.06);padding:0 18px;font:600 10.5px/1 'Barlow Condensed','Noto Sans JP',sans-serif;letter-spacing:.24em;color:var(--gold);white-space:nowrap;}
+.tk-label{display:flex;align-items:center;background:rgba(255,255,255,.06);padding:0 18px;font:600 11.5px/1 'Barlow Condensed','Noto Sans JP',sans-serif;letter-spacing:.24em;color:var(--gold);white-space:nowrap;}
 .tk-wrap{flex:1;overflow:hidden;display:flex;align-items:center;}
-.tk-inner{display:flex;gap:64px;padding:9px 24px;white-space:nowrap;font-size:11.5px;letter-spacing:.06em;color:rgba(255,255,255,.86);animation:ticker 36s linear infinite;}
+.tk-inner{display:flex;gap:64px;padding:11px 24px;white-space:nowrap;font-size:13px;letter-spacing:.05em;color:rgba(255,255,255,.86);animation:ticker 36s linear infinite;}
 .tk-inner span{color:rgba(255,255,255,.86);}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -71,7 +71,7 @@ header{background:#fdfdfc;border-bottom:1px solid var(--line-soft);position:stic
 nav{display:flex;align-items:center;gap:26px;}
 nav a{color:var(--ink);font-size:12.5px;letter-spacing:.1em;font-weight:500;padding:6px 0;transition:color .18s;}
 nav a:hover{color:var(--navy);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
+.hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;width:48px;height:48px;padding:0;background:none;border:none;}
 .hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s;}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .hamburger.open span:nth-child(2){opacity:0;}
@@ -151,8 +151,20 @@ nav a:hover{color:var(--navy);}
 .sch-tbl thead th{background:var(--navy);color:#fff;padding:14px 16px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.14em;}
 .sch-tbl tbody td{padding:16px;border-top:1px solid rgba(18,20,31,.1);vertical-align:middle;}
 .sch-tbl tbody tr:last-child td{border-bottom:1px solid var(--line);}
-.sch-tbl td:first-child{font-weight:700;color:var(--navy);white-space:nowrap;}
+.sch-tbl .c-date{font-weight:700;color:var(--navy);white-space:nowrap;}
+.sch-tbl .c-venue{color:var(--ink);}
+.sch-tbl .c-dl{color:var(--gray);}
 .sch-name{font-weight:500;color:var(--navy);}
+.sch-tbl tbody tr.is-past .c-date,.sch-tbl tbody tr.is-past .sch-name{color:var(--gray);}
+.sch-tbl tbody tr.is-past .c-venue,.sch-tbl tbody tr.is-past .c-dl{color:#8a8a94;}
+.sch-tbl tbody tr.is-next{background:var(--bg-note);box-shadow:inset 3px 0 0 var(--red);}
+.next-tag{display:inline-block;margin-right:8px;padding:2px 8px;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.08em;border-radius:2px;vertical-align:middle;line-height:1.6;}
+.res-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:1px solid var(--red);color:var(--red);font-size:13px;font-weight:700;letter-spacing:.06em;white-space:nowrap;border-radius:2px;transition:background .18s,color .18s;}
+.res-btn:hover{background:var(--red);color:#fff;}
+.res-btn.solid{background:var(--red);color:#fff;}
+.res-btn.solid:hover{background:var(--red-d);}
+.res-none{color:#999;}
+.past-toggle{display:none;}
 .sch-note{display:flex;align-items:center;gap:28px;margin-top:18px;flex-wrap:wrap;}
 .sch-note .a{font-size:12.5px;color:var(--ink);letter-spacing:.02em;}
 .sch-note .b{font-size:12.5px;color:var(--gray);}
@@ -294,9 +306,22 @@ footer{background:var(--navy);border-top:1px solid rgba(201,162,75,.6);color:rgb
   .news-grid{grid-template-columns:1fr;}
   .docs-grid{grid-template-columns:1fr;}
   .gal-grid{grid-template-columns:repeat(2,1fr);}
-  .sch-scroll{overflow-x:auto;}
-  .sch-tbl{min-width:640px;font-size:12.5px;}
-  .sch-tbl thead th,.sch-tbl tbody td{padding:11px 12px;}
+  .sch-tbl,.sch-tbl tbody{display:block;width:100%;}
+  .sch-tbl thead{display:none;}
+  .sch-tbl tbody tr{display:grid;grid-template-columns:1fr auto;column-gap:12px;row-gap:2px;align-items:center;padding:14px 12px;border-top:1px solid rgba(18,20,31,.1);}
+  .sch-tbl tbody tr:last-child{border-bottom:1px solid var(--line);}
+  .sch-tbl tbody td,.sch-tbl tbody tr:last-child td{display:block;padding:0;border:0;}
+  .sch-tbl .c-date{grid-column:1;grid-row:1;font-size:13px;}
+  .sch-tbl .c-name{grid-column:1;grid-row:2;}
+  .sch-tbl .sch-name{font-size:14.5px;line-height:1.6;}
+  .sch-tbl .c-venue{grid-column:1;grid-row:3;font-size:12.5px;}
+  .sch-tbl .c-dl{grid-column:1;grid-row:4;font-size:12.5px;}
+  .sch-tbl .c-dl::before{content:'申込締切 ';color:var(--gray);}
+  .sch-tbl .c-dl.empty{display:none;}
+  .sch-tbl .c-res{grid-column:2;grid-row:1 / span 4;align-self:center;justify-self:end;}
+  .sch-tbl .res-none{display:none;}
+  .past-toggle{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-bottom:8px;background:#fff;border:1px solid var(--line);border-radius:2px;color:var(--navy);font-family:inherit;font-size:13.5px;font-weight:700;letter-spacing:.04em;cursor:pointer;}
+  .sch-scroll.past-collapsed .is-past{display:none;}
   .con-card{flex-direction:column;align-items:flex-start;gap:18px;}
   .con-card .btn{width:100%;justify-content:center;}
   .ft-in{padding:40px 20px 28px;}
@@ -621,6 +646,7 @@ async function loadSchedule() {
     const rows = json.table.rows || [];
     if(!rows.length){ body.innerHTML='<tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">日程はまだ登録されていません。</td></tr>'; return; }
     const jsonLdEvents = [];
+    let nextMarked = false; // 最初の「まだ終わっていない大会」に目印を付ける
     body.innerHTML = rows.map(r => {
       const date = r.c[0]?.v||'';
       const name = r.c[1]?.v||'';
@@ -636,16 +662,16 @@ async function loadSchedule() {
       // 結果用スプレッドシートのリンクは今まで通り開催日8:30まで非表示。
       // それ以外の外部リンク(特設ページ等)は日付に関係なく「詳細」として今すぐ表示する。
       const isSpreadsheetLink = resultUrl && resultUrl.indexOf('/spreadsheets/') !== -1;
-      let resultCell = '<span style="color:#999;">―</span>';
+      let resultCell = '<span class="res-none">―</span>';
       if (resultUrl) {
         if (isSpreadsheetLink) {
           if (isPast) {
-            resultCell = `<a href="${escapeHtml(resultUrl)}" target="_blank" rel="noopener" style="font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--red);border-bottom:1px solid rgba(168,18,31,.4);padding-bottom:2px;">結果PDF</a>`;
+            resultCell = `<a class="res-btn" href="${escapeHtml(resultUrl)}" target="_blank" rel="noopener">結果PDF</a>`;
           }
         } else if (isPast) {
-          resultCell = `<a href="${escapeHtml(resultUrl)}" target="_blank" rel="noopener" style="font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--red);border-bottom:1px solid rgba(168,18,31,.4);padding-bottom:2px;">結果PDF</a>`;
+          resultCell = `<a class="res-btn" href="${escapeHtml(resultUrl)}" target="_blank" rel="noopener">結果PDF</a>`;
         } else {
-          resultCell = `<a href="${escapeHtml(resultUrl)}" target="_blank" rel="noopener" style="display:inline-block;padding:3px 10px;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.08em;">詳細</a>`;
+          resultCell = `<a class="res-btn solid" href="${escapeHtml(resultUrl)}" target="_blank" rel="noopener">詳細</a>`;
         }
       }
       if (name && !isNaN(eventDate) && eventDate >= now) {
@@ -659,12 +685,32 @@ async function loadSchedule() {
           url: 'https://higashi-mikawa.github.io/#schedule'
         });
       }
-      return `<tr><td style="font-weight:700;color:var(--navy);white-space:nowrap;">${escapeHtml(date)}</td><td><div class="sch-name">${escapeHtml(name)}</div></td><td style="color:var(--ink);">${escapeHtml(venue)}</td><td style="color:var(--gray);">${dlCell}</td><td>${resultCell}</td></tr>`;
+      const isNext = !isPast && !nextMarked;
+      if (isNext) nextMarked = true;
+      const rowClass = isPast ? 'is-past' : (isNext ? 'is-next' : '');
+      const nextTag = isNext ? '<span class="next-tag">次の大会</span>' : '';
+      return `<tr class="${rowClass}"><td class="c-date">${escapeHtml(date)}</td><td class="c-name"><div class="sch-name">${nextTag}${escapeHtml(name)}</div></td><td class="c-venue">${escapeHtml(venue)}</td><td class="c-dl${deadline ? '' : ' empty'}">${dlCell}</td><td class="c-res">${resultCell}</td></tr>`;
     }).join('');
     injectScheduleJsonLd(jsonLdEvents);
+    // スマホでは終わった大会を畳み、「次の大会」が先頭に見えるようにする（ボタンで開ける）
+    const pastCount = body.querySelectorAll('tr.is-past').length;
+    const wrap = document.querySelector('.sch-scroll');
+    if (pastCount > 0 && wrap && !document.getElementById('pastToggle')) {
+      wrap.classList.add('past-collapsed');
+      wrap.insertAdjacentHTML('afterbegin', `<button type="button" id="pastToggle" class="past-toggle" aria-expanded="false" data-count="${pastCount}" onclick="togglePast()">過去の大会と結果を見る（${pastCount}件）</button>`);
+    }
   } catch(e) {
     body.innerHTML=`<tr><td colspan="5" style="text-align:center;padding:20px;color:#888;">読み込みに失敗しました。(${e.message})</td></tr>`;
   }
+}
+
+function togglePast() {
+  const wrap = document.querySelector('.sch-scroll');
+  const btn = document.getElementById('pastToggle');
+  if (!wrap || !btn) return;
+  const collapsed = wrap.classList.toggle('past-collapsed');
+  btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+  btn.textContent = collapsed ? `過去の大会と結果を見る（${btn.dataset.count}件）` : '過去の大会を閉じる';
 }
 
 function toggleMenu() {
